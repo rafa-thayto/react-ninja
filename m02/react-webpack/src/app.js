@@ -1,7 +1,12 @@
 'use strict'
+import React, { Component } from 'react'
 
-function soma(a, b) {
-    return a + b
+export default class App extends Component {
+
+	render() {
+		return (
+			React.createElement('h1', null, 'Titulo')
+		)
+	}
+
 }
-
-module.exports = soma

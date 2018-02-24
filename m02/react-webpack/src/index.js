@@ -1,5 +1,9 @@
 'use strict'
+import App from './app'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-const soma = require('./app')
-
-console.log(soma(1, 2))
+ReactDOM.render(
+  React.createElement(App)
+  , document.getElementById('root')
+)

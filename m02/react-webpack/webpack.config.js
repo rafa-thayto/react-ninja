@@ -1,9 +1,17 @@
 'use strict'
 
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
-	entry: path.join(__dirname, 'src', 'index'),
+	devtool: 'inline-source-map',
+
+	entry: [
+		'react-hot-loader/patch',
+		'webpack-dev-server/client?http://localhost:3000',
+		'webpack/hot/only-dev-server',
+		path.join(__dirname, 'src', 'index')
+	],
 
 	output: {
 		path: path.join(__dirname, 'dist'),
@@ -11,12 +19,26 @@ module.exports = {
 		publicPath: '/dist/'
 	},
 
+	plugins: [
+		new webpack.HotModuleReplacementPlugin()
+	],
+
 	module: {
-		loaders: [{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			include: /src/,
-			loader: 'babel'
-		}]
+		rules: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				include: /src/,
+				use: ['standard-loader'],
+				enforce: 'pre'
+			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				include: /src/,
+				use: ['babel-loader']
+			}
+		]
 	}
+
 }
